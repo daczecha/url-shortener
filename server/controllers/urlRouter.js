@@ -10,12 +10,17 @@ urlRouter.get('/:code', async (request, response) => {
 });
 
 urlRouter.post('/', async (request, response) => {
-  const url = request.body;
+  response.setHeader('Access-Control-Allow-Origin', '*');
+  let url;
+  if (request.body) {
+    url = request.body;
+  } else return response.status(404).send({ error: 'please input url' });
+
   const code = randomstring.generate(7);
   const obj = { url, code };
   const newUrl = new Url(obj);
   await newUrl.save();
-  response.send(obj);
+  response.status(200).send(obj);
 });
 
 module.exports = urlRouter;
