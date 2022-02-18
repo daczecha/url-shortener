@@ -13,7 +13,6 @@ function App() {
     const response = await shortenUrl(url);
     setShortUrl(`${window.location.origin}/r/${response.code}`);
   };
-
   return (
     <div className="App">
       <h1>test</h1>
